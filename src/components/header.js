@@ -11,8 +11,8 @@ class Header extends Component {
       <div className="header">
         <h1 className="heading">Beans Love Bears</h1>
         <ul className="list">
-          <li className="list__item"><a href="#" className="menu-link">Home</a></li>
-          <li className="list__item"><a href = "#" className="menu-link">Favorite</a></li>
+          <li className="list__item"><a href="/" className="menu-link">Home</a></li>
+          <li className="list__item"><a href = "/favorites" className="menu-link">Favorite</a></li>
         </ul>
       </div>
     )

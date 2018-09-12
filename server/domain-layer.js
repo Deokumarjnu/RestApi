@@ -3,14 +3,13 @@ var users = {};
 
 function addFavorites(beers, user_id) {
   const favorites = users[user_id];
-
   return beers.map(beer => {
+    beer.description = beer.description.substr(0,100);
     if (!favorites) {
       beer.favorite=false;
-      beer.description = beer.description.split(/\s+/).slice(0,20).join(" ");
       return beer;
     }
-    beer.favorite=favorites.has(beer.id);
+    beer.favorite=favorites.has(beer.id.toString());
     return beer;
   });
 }
@@ -32,7 +31,21 @@ function getBeers(page, per_page, user_id) {
   });
 }
 
+function favorites(id, user_id) {
+  if (users[user_id]) {
+    if (users[user_id].has(id)) {
+      users[user_id].delete(id);
+    } else {
+      users[user_id].add(id);
+    }
+  }
+  else {
+    users[user_id] = new Set([id]);
+  }
+  return users[user_id];
+}
 
 module.exports = {
-  getBeers
+  getBeers,
+  favorites
 }

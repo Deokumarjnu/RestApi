@@ -10,8 +10,14 @@ class Home extends Component {
       beers: [],
       loading: false,
     }
+    this.fetchBeers = this.fetchBeers.bind(this);
   }
+
   componentDidMount() {
+    this.fetchBeers()
+  }
+
+  fetchBeers() {
     getBeers(1,9).then(beers => {
       this.setState({beers: beers, loading: true});
     });
@@ -25,7 +31,7 @@ class Home extends Component {
       <div className="container">
         {
           this.state.beers.map(beer => {
-            return <Card key={beer.id} beer={beer}/>
+            return <Card key={beer.id} beer={beer} onFavoriteToggle={this.fetchBeers}/>
           })
         }
       </div>

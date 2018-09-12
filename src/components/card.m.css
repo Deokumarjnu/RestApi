@@ -7,29 +7,32 @@
   display: grid;
   grid-template-columns: 1fr 2fr;
   grid-template-rows: 50px 225px;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
 }
-.card__start {
+.card__star {
   grid-column: 1 /4;
   display: flex;
   justify-content: flex-end;
   padding: 15px 20px 0px 0px;
 }
-
-.card-1 {
-  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+.star__button {
+  border-color: white;
+  background-color: white;
+  outline-color: white;
+  cursor: pointer;
+  padding: 0;
+  height: 15px;
 }
 
-.card-1:hover {
+.card:hover {
   box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
 }
 .card--star {
   cursor: pointer;
 }
 .checked {
-    color: orange;
+  color: orange;
 }
 .cardImage {
   width: 40%;
@@ -37,7 +40,7 @@
   margin: 0 auto;
 }
 
-.content {
+.card__content {
   text-align: left;
 }
 .content__heading {
