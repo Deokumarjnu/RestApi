@@ -1,0 +1,46 @@
+.card {
+  background: #fff;
+  border-radius: 2px;
+  height: 225px;
+  margin: 1rem;
+  position: relative;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: 50px 225px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.card__start {
+  grid-column: 1 /4;
+  display: flex;
+  justify-content: flex-end;
+  padding: 15px 20px 0px 0px;
+}
+
+.card-1 {
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+
+.card-1:hover {
+  box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+}
+.card--star {
+  cursor: pointer;
+}
+.checked {
+    color: orange;
+}
+.cardImage {
+  width: 40%;
+  height: 60%;
+  margin: 0 auto;
+}
+
+.content {
+  text-align: left;
+}
+.content__heading {
+  margin: 0;
+  font-size: 20px;
+}

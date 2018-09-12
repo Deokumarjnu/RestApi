@@ -7,6 +7,7 @@ function addFavorites(beers, user_id) {
   return beers.map(beer => {
     if (!favorites) {
       beer.favorite=false;
+      beer.description = beer.description.split(/\s+/).slice(0,20).join(" ");
       return beer;
     }
     beer.favorite=favorites.has(beer.id);

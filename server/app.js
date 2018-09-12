@@ -4,7 +4,11 @@ var url = require('url');
 const uuidv4 = require('uuid/v4');
 var cookieParser = require('cookie-parser')
 const domainLayerFun = require('./domain-layer');
-app.use(cookieParser())
+
+app.set('view engine', 'ejs');
+app.set('views','./server/views');
+
+app.use(cookieParser());
 
 app.use((req, res, next) => {
   if (!req.cookies.user) {
@@ -35,6 +39,20 @@ app.get('/api/beers', (req, res, next) => {
   .catch(err => {
     console.log(err);
     res.status(500).send();
+  });
+});
+
+app.get('/', (req, res) => {
+  res.status(200).render('./layout.ejs', {
+    title: 'Home',
+    page_type: 'home'
+  });
+});
+
+app.get('/api/beers/favorites', (req, res, next) => {
+  res.status(200).render('./layout.ejs', {
+    title: 'Favorites',
+    page_type: 'favorites'
   });
 });
 

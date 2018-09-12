@@ -1,0 +1,25 @@
+.header {
+  background-color: green;
+  padding: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-gap: 10px;
+  color: white;
+}
+.heading {
+  font-weight: 400;
+}
+.list {
+  grid-column: 3 / 4;
+  list-style: none;
+  display: flex;
+  justify-self: flex-end;
+}
+.list__item {
+  padding: 0 10px;
+  align-self: center;
+}
+.menu-link {
+  text-decoration: none;
+  color: white;
+}
