@@ -5,6 +5,15 @@
   text-align: center;
   margin-top: 20px;
 }
+.loading,
+.error {
+  position: fixed;
+  top: 40px;
+  margin: auto;
+  left: 50%;
+  color: white;
+  font-weight: 700;
+}
 @media(min-width: 767px) {
   .container {
     grid-template-columns: 1fr 1fr 1fr;

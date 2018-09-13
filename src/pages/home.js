@@ -32,15 +32,14 @@ class Home extends Component {
   }
 
   render(){
-    if (this.state.loading) {
-      return <div className="container">Loading ...</div>
-    }
     return (
       <div className="container">
+        {this.state.loading && <div className="loading">Loading ...</div>}
+        {this.state.errorMsg && <div className="error">{this.state.errorMsg}</div>}
         {
-          !this.state.errorMsg ? this.state.beers.map(beer => {
+          this.state.beers && this.state.beers.map(beer => {
             return <Card key={beer.id} beer={beer} onFavoriteToggle={this.fetchBeers}/>
-          }) : <div>{this.state.errorMsg}</div>
+          })
         }
       </div>
     );
