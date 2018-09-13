@@ -1,12 +1,18 @@
 const request = require('request-promise-native');
 
-const getBeers = (page = 1, per_page = 9) => {
+const getBeers = ({page = 1, per_page = 9, favorite_ids}) => {
+  let qs = {
+    page,
+    per_page
+  }
+
+  if (favorite_ids) {
+    qs.ids = favorite_ids;
+  }
+
   var options = {
       uri: `https://api.punkapi.com/v2/beers`,
-      qs: {
-          page,
-          per_page
-      },
+      qs,
       json: true // Automatically parses the JSON string in the response
   };
 

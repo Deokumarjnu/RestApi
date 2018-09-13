@@ -26,7 +26,7 @@ app.get('/api/beers', (req, res, next) => {
   const page = req.query.page;
   const per_page = req.query.per_page;
 
-  domainLayerFun.getBeers(page, per_page, req.cookies.user).then(({result,error}) => {
+  domainLayerFun.getBeers({page, per_page, user_id: req.cookies.user}).then(({result,error}) => {
     if (error) {
       console.log(error);
       res.status(500).send();
@@ -43,16 +43,14 @@ app.get('/api/beers', (req, res, next) => {
   });
 });
 
-app.post('/api/beers/:id/favorites', (req, res, next) => {
-  const id = req.params.id;
-  const favoritesItems = domainLayerFun.favorites(id, req.cookies.user);
-  const url_parts = url.parse(req.url, true);
-  const query = url_parts.query;
+app.get('/api/beers/favorites', (req, res, next) => {
+  var url_parts = url.parse(req.url, true);
+  var query = url_parts.query;
 
   const page = req.query.page;
   const per_page = req.query.per_page;
 
-  domainLayerFun.getBeers(page, per_page, req.cookies.user).then(({result,error}) => {
+  domainLayerFun.getFavoriteBeers(req.cookies.user, {page, per_page}).then(({result,error}) => {
     if (error) {
       console.log(error);
       res.status(500).send();
@@ -66,7 +64,13 @@ app.post('/api/beers/:id/favorites', (req, res, next) => {
   .catch(err => {
     console.log(err);
     res.status(500).send();
-  });
+  })
+});
+
+app.post('/api/beers/:id/favorites', (req, res, next) => {
+  const id = req.params.id;
+  const favoritesItems = domainLayerFun.setFavorites(id, req.cookies.user);
+  res.status(201).send({result:'success'});
 });
 
 app.get('/', (req, res) => {

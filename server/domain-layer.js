@@ -14,8 +14,8 @@ function addFavorites(beers, user_id) {
   });
 }
 
-function getBeers(page, per_page, user_id) {
- return punkApi.getBeers(page, per_page).then(({result,error}) => {
+function getBeers({page=1, per_page=9, user_id, favorite_ids}) {
+ return punkApi.getBeers({page, per_page, favorite_ids}).then(({result,error}) => {
     if (error) {
       return {
         'error':'unable to fetch beer'
@@ -31,7 +31,7 @@ function getBeers(page, per_page, user_id) {
   });
 }
 
-function favorites(id, user_id) {
+function setFavorites(id, user_id) {
   if (users[user_id]) {
     if (users[user_id].has(id)) {
       users[user_id].delete(id);
@@ -42,10 +42,32 @@ function favorites(id, user_id) {
   else {
     users[user_id] = new Set([id]);
   }
+  console.log(users[user_id])
   return users[user_id];
+}
+
+async function getFavoriteBeers(user_id, {page = 1, per_page = 9}) {
+  if (!user_id) {
+    return {'result': []};
+  }
+
+  const favorite_ids = users[user_id] && Array.from(users[user_id]).join('|')
+
+  if (!favorite_ids) {
+    return {'result': []}
+  }
+
+  return await getBeers({user_id, favorite_ids}).then(({result,error}) => {
+
+    if (!error) {
+      return {'result': result};
+    }
+    return {'error':'unable to fetch beer'};
+  })
 }
 
 module.exports = {
   getBeers,
-  favorites
+  getFavoriteBeers,
+  setFavorites
 }

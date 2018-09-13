@@ -19,18 +19,25 @@ class Favorite extends Component {
   }
 
   fetchBeers() {
-    getBeers(1,9).then(beers => {
-      const favoriteBeers = beers.filter(beer => {
-        if (beer.favorite===true) {
-          return beer;
-        }
-      });
-      this.setState({beers: favoriteBeers, loading: true});
+    getBeers(1,9).then(({result,error}) => {
+       if (!error) {
+        const favoriteBeers = result.filter(beer => {
+          if (beer.favorite===true) {
+            return beer;
+          }
+        });
+        this.setState({beers: favoriteBeers});
+      }
+      else {
+        this.setState({errorMsg:error})
+      }
+
+      this.setState({loading: false});
     });
   }
 
   render() {
-    if (!this.state.loading) {
+    if (this.state.loading) {
       return <div className="container">Loading ...</div>
     }
     return (
