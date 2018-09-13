@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {Card} from '../components/card';
-import {getBeers} from '../api';
+import {getFavoriteBeers} from '../api';
 
 import './favorite.m.css'
 class Favorite extends Component {
@@ -19,7 +19,7 @@ class Favorite extends Component {
   }
 
   fetchBeers() {
-    getBeers(1,9).then(({result,error}) => {
+    getFavoriteBeers(1,9).then(({result,error}) => {
        if (!error) {
         const favoriteBeers = result.filter(beer => {
           if (beer.favorite===true) {
