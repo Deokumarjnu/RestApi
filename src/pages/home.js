@@ -9,6 +9,7 @@ class Home extends Component {
     this.state = {
       beers: [],
       loading: false,
+      errorMsg:'',
     }
     this.fetchBeers = this.fetchBeers.bind(this);
   }
@@ -18,21 +19,28 @@ class Home extends Component {
   }
 
   fetchBeers() {
-    getBeers(1,9).then(beers => {
-      this.setState({beers: beers, loading: true});
+    this.setState({loading: true});
+    getBeers(1,9).then(({result,error}) => {
+      if (!error) {
+        this.setState({beers: result});
+      }
+      else {
+        this.setState({errorMsg:error})
+      }
+      this.setState({loading: false});
     });
   }
 
   render(){
-    if (!this.state.loading) {
+    if (this.state.loading) {
       return <div className="container">Loading ...</div>
     }
     return (
       <div className="container">
         {
-          this.state.beers.map(beer => {
+          !this.state.errorMsg ? this.state.beers.map(beer => {
             return <Card key={beer.id} beer={beer} onFavoriteToggle={this.fetchBeers}/>
-          })
+          }) : <div>{this.state.errorMsg}</div>
         }
       </div>
     );
