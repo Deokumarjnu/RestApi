@@ -15,11 +15,13 @@ class App extends Component {
       beers: [],
       loading: false,
       errorMsg:'',
+      page:1,
+      per_page:9,
     }
     this.fetchBeers = this.fetchBeers.bind(this);
   }
   componentDidMount() {
-    this.fetchBeers()
+    this.fetchBeers(this.state.page,this.state.per_page)
   }
    getBeers() {
     if (this.props.page_type==='home') {
@@ -32,10 +34,9 @@ class App extends Component {
     return Promise.resolve({error:'Invalid Page Type'});
 
   }
-  fetchBeers() {
-    this.setState({loading: true});
-
-    this.getBeers().then(({result,error}) => {
+  fetchBeers(page, per_page) {
+    this.setState({loading: true, page:page, per_page, per_page});
+    this.getBeers(page, per_page).then(({result,error}) => {
       if (!error) {
         this.setState({beers: result});
       }
@@ -50,7 +51,7 @@ class App extends Component {
     return (
       <React.Fragment>
         <Header />
-        <div className = "container">
+        <div className = "container threeColLayout">
           {this.state.loading && <div className="loading">Loading ...</div>}
           {this.state.errorMsg && <div className="error">{this.state.errorMsg}</div>}
           {

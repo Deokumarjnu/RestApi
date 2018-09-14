@@ -1,6 +1,23 @@
+.threeColLayout {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 10px;
+}
+.loading,
+.error {
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 40px;
+  color: white;
+  font-weight: 700;
+}
 @media (min-width: 1200px) {
   .container {
     width: 1200px;
     margin: auto;
+  }
+  .threeColLayout {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
