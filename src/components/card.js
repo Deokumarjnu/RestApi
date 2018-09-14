@@ -10,7 +10,7 @@ class Card extends Component {
 
   markUnmarkFavorite() {
     setFavorite(this.props.beer.id).then(() => {
-      this.props.onFavoriteToggle();
+      this.props.onFavoriteToggle(this.props.page, this.props.per_page);
     });
   }
   render() {

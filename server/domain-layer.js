@@ -57,7 +57,7 @@ async function getFavoriteBeers(user_id, {page = 1, per_page = 9}) {
     return {'result': []}
   }
 
-  return await getBeers({user_id, favorite_ids}).then(({result,error}) => {
+  return await getBeers({page, per_page, user_id, favorite_ids}).then(({result,error}) => {
 
     if (!error) {
       return {'result': result};
